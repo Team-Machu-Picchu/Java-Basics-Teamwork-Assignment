@@ -5,9 +5,10 @@ import java.io.FileInputStream;
 
 public class Sound {
 	
-	
 	public static void playBackgroundMusic(){
 
+		while(true){
+		
 	    try{
 
 	    FileInputStream fis = new FileInputStream("sounds/wipala.mp3");
@@ -16,5 +17,7 @@ public class Sound {
 	    playMP3.play();
 
 	    }catch(Exception e){System.out.println(e);}
+	    
+		}
 	}
 }

@@ -11,6 +11,8 @@ import javax.swing.SwingUtilities;
 
 public class Window extends JFrame {
 	
+	private Sound music;
+	
 	public Window() {
 		
 		// Sets the title
@@ -96,7 +98,8 @@ public class Window extends JFrame {
         soundOn.addActionListener(new ActionListener() {
          	@Override
          	public void actionPerformed(ActionEvent actionEvent) {
-         		Sound.playBackgroundMusic();         		
+         		music = new Sound();
+         		music.start();
            	}
          	
         });

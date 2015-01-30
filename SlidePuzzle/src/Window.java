@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 
@@ -27,13 +29,9 @@ public class Window extends JFrame implements ActionListener {
 			// Puts the frame to full screen.
 			this.setExtendedState(this.MAXIMIZED_BOTH);
 		}
-		else { // Window mode
-			// Size of the frame.
-			this.setSize(500, 500);
-			// Puts frame to center of the screen.
-			this.setLocationRelativeTo(null);
-			// So that frame cannot be resizable by the user.
-			this.setResizable(true);
+		else { // Window mode			
+			// Frame cannot be resized by the user.
+			this.setResizable(false);
 		}
 
 		// Exit the application when user close frame.
@@ -106,6 +104,12 @@ public class Window extends JFrame implements ActionListener {
 		menubar.add(info);
 
 		setJMenuBar(menubar);
+		
+		//This is just a placeholder to replace with Board later.
+		JPanel content = new JPanel();
+		// Size of the pane.
+		content.setPreferredSize(new Dimension(500, 500));
+		this.setContentPane(content);
 
 	}
 
@@ -137,8 +141,11 @@ public class Window extends JFrame implements ActionListener {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				//Create an instance of the Window and make it visible on the screen
+				//Create an instance of the Window and resize it to fit all the content.
 				Window window = new Window();
+				window.pack();
+				// Puts frame to center of the screen.
+				window.setLocationRelativeTo(null);
 				//Make it visible on the screen
 				window.setVisible(true);
 			}

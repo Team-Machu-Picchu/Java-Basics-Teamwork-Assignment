@@ -4,10 +4,6 @@ import javazoom.jl.player.Player;
 
 public class Sound {
 	
-	public static void main(String[] args) {
-		playBackgroundMusic();
-	}
-	
   private String filename;
   private Player player;
 

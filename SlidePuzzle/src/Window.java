@@ -39,17 +39,17 @@ public class Window extends JFrame {
         JMenuBar menubar = new JMenuBar();
         
         //Display icons in the menu
-        ImageIcon iconNew = new ImageIcon("Images/puzzle.png");
+        ImageIcon iconNew = new ImageIcon("Images/puzzle.jpg");
         ImageIcon iconOpen = new ImageIcon("Images/open.png");
         ImageIcon iconSave = new ImageIcon("Images/save.png");
         ImageIcon iconExit = new ImageIcon("Images/exit.png");
         ImageIcon iconSettings = new ImageIcon("Images/settings.png");
-        ImageIcon iconInd1 = new ImageIcon("Images/ind1.png");
-        ImageIcon iconInd2 = new ImageIcon("Images/ind2.png");
-        ImageIcon iconInd3 = new ImageIcon("Images/ind3.png");
+        ImageIcon iconInd1 = new ImageIcon("Images/ind1.jpg");
+        ImageIcon iconInd2 = new ImageIcon("Images/ind2.jpg");
+        ImageIcon iconInd3 = new ImageIcon("Images/ind3.jpg");
         ImageIcon iconInd4 = new ImageIcon("Images/ind4.png");
         ImageIcon iconSoundOn = new ImageIcon("Images/soundOn.png");
-        ImageIcon iconSoundOff = new ImageIcon("Images/soundOff.png");
+        ImageIcon iconSoundOff = new ImageIcon("Images/soundOff.jpg");
 
         JMenu file = new JMenu("Menu");
        

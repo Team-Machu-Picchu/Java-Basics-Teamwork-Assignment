@@ -1,63 +1,37 @@
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+
 import javazoom.jl.player.Player;
 
-public class Sound {
-	
-  private String filename;
-  private Player player;
+public class Sound extends Thread {
 
-  //MP3 constructor;
-  
-  public Sound(String filename) {
-    this.filename = filename;
-  }
+    private String fileLocation;
+    private boolean loop;
+    private Player player;
 
-  // The player;
-  
-  public void play() {
-    try {
-      FileInputStream fis = new FileInputStream(this.filename);
-      BufferedInputStream bis = new BufferedInputStream(fis);
-
-      this.player = new Player(bis);
-    } catch (Exception e) {
-        System.err.printf("%s\n", e.getMessage());
+    public Sound() {
+        this.fileLocation = "sounds/wipala.mp3";
+        this.loop = true;
     }
 
-    new Thread() {
-      @Override
-      public void run() {
+    public void run() {
+    	// Play in an infinite loop;
         try {
-          player.play();
-        } catch (Exception e) {
-            System.err.printf("%s\n", e.getMessage());
+        	while (loop) {
+                FileInputStream fis = new FileInputStream(fileLocation);
+                BufferedInputStream bis = new BufferedInputStream(fis);
+                player = new Player(bis);
+                player.play();
+            }
+        } catch (Exception ioe) {
+        	System.err.printf("%s\n", ioe.getMessage());
         }
-      }
-    }.start();
-  }
-
-  // Close the player;
-  
-  public void close() {
-    if (this.player != null) {
-      this.player.close();
     }
-  }
 
-
-// Play in an infinite loop;
-
-  public static void playBackgroundMusic() {
-    Sound mp3 = new Sound("sounds/wipala.mp3");
-
-    mp3.play();
-
-    while (true) {
-      if (mp3.player.isComplete()) {
-        mp3.close();
-        mp3.play();
-      }
+    // Close the player;
+    public void close(){
+        loop = false;
+        player.close();
+        this.interrupt();
     }
-  }
 }

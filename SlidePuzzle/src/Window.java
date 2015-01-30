@@ -1,4 +1,5 @@
 import java.awt.Dimension;
+import java.awt.SplashScreen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -141,6 +142,21 @@ public class Window extends JFrame implements ActionListener {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
+				//Try to show the splash screen.
+				final SplashScreen splash = SplashScreen.getSplashScreen();
+				if (splash == null) {
+					System.err.println("Your splash image is missing!");
+				}
+				else {
+					try {
+						//Hold the splash screen for 3 seconds.
+						Thread.sleep(3000);
+					}
+					catch(InterruptedException e) {
+						System.err.println("Thread was interrupted!");
+					}
+					splash.close();
+				}
 				//Create an instance of the Window and resize it to fit all the content.
 				Window window = new Window();
 				window.pack();

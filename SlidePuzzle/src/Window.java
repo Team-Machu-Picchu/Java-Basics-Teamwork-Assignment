@@ -58,6 +58,7 @@ public class Window extends JFrame implements ActionListener {
 		JMenu info = new JMenu("About");
 
 		JMenu set = new JMenu("Settings");
+		set.setIcon(iconSettings);
 
 		JMenu setGame = new JMenu("Set Game");
 		JMenu setSounds = new JMenu("Set Sounds");
@@ -89,7 +90,6 @@ public class Window extends JFrame implements ActionListener {
 		JMenuItem fileOpen = new JMenuItem("Open", iconOpen);
 		JMenuItem fileSave = new JMenuItem("Save", iconSave);
 		JMenuItem fileExit = new JMenuItem("Exit", iconExit);
-		JMenuItem fileSettings = new JMenuItem("Settings", iconSettings);
 		fileExit.setActionCommand("exit");  
 		fileExit.addActionListener(this);                
 

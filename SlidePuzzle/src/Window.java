@@ -29,7 +29,7 @@ public class Window extends JFrame {
 		    // Puts frame to center of the screen.
 		    this.setLocationRelativeTo(null);
 		    // So that frame cannot be resizable by the user.
-		    this.setResizable(false);
+		    this.setResizable(true);
 		}
 		        
 		// Exit the application when user close frame.
@@ -52,6 +52,7 @@ public class Window extends JFrame {
         ImageIcon iconSoundOff = new ImageIcon("Images/soundOff.png");
 
         JMenu file = new JMenu("Menu");
+        JMenu info = new JMenu("About");
        
         JMenu set = new JMenu("Settings");
         
@@ -85,13 +86,22 @@ public class Window extends JFrame {
             
         //Exit the application
         fileExit.addActionListener(new ActionListener() {
-               
-        	@Override
+            @Override
             public void actionPerformed(ActionEvent event) {
         		System.exit(0);
             }
         });
-
+        
+        //Settings sounds On
+        soundOn.addActionListener(new ActionListener() {
+         	@Override
+         	public void actionPerformed(ActionEvent actionEvent) {
+         		Sound.playBackgroundMusic();         		
+           	}
+         	
+        });
+        
+         
         file.add(fileNew);
         file.add(fileOpen);
         file.add(fileSave);
@@ -101,14 +111,14 @@ public class Window extends JFrame {
         file.add(fileExit);
 
         menubar.add(file);
+        menubar.add(info);
 
         setJMenuBar(menubar);
-
         
    
 	}
-        
-        
+	
+	        
         public static void main(String[] args) {
             
         	SwingUtilities.invokeLater(new Runnable() {
@@ -116,7 +126,6 @@ public class Window extends JFrame {
                 public void run() {
                 	//Create an instance of the Window and make it visible on the screen
                 	Window window = new Window();
-                	
                 	//Make it visible on the screen
                     window.setVisible(true);
                 }

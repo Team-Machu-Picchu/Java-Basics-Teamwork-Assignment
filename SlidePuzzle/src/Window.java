@@ -177,11 +177,13 @@ public class Window extends JFrame implements ActionListener {
 				}
 				//Create an instance of the Window and resize it to fit all the content.
 				Window window = new Window();
+				
 				window.pack();
 				// Puts frame to center of the screen.
 				window.setLocationRelativeTo(null);
 				//Make it visible on the screen
 				window.setVisible(true);
+				window.add (new Board());
 			}
 		});
 	}

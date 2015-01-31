@@ -116,7 +116,7 @@ public class Window extends JFrame implements ActionListener {
 		setJMenuBar(menubar);
 		
 		//This is just a placeholder to replace with Board later.
-		JPanel content = new JPanel();
+		Board content = new Board();
 		// Size of the pane.
 		content.setPreferredSize(new Dimension(500, 500));
 		this.setContentPane(content);
@@ -177,13 +177,13 @@ public class Window extends JFrame implements ActionListener {
 				}
 				//Create an instance of the Window and resize it to fit all the content.
 				Window window = new Window();
-				
+				//window.add (new Board());
 				window.pack();
 				// Puts frame to center of the screen.
 				window.setLocationRelativeTo(null);
 				//Make it visible on the screen
 				window.setVisible(true);
-				window.add (new Board());
+				
 			}
 		});
 	}

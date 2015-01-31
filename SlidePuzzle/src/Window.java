@@ -1,23 +1,35 @@
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.SplashScreen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 
 
 public class Window extends JFrame implements ActionListener {
 
 	private Sound music;
-
+	
+	private JPanel panel;
+ 
+		
 	public Window() {
 
 		// Sets the title
@@ -55,9 +67,14 @@ public class Window extends JFrame implements ActionListener {
 		ImageIcon iconSoundOff = new ImageIcon("Images/soundOff.jpg");
 
 		JMenu file = new JMenu("Menu");
-		JMenu info = new JMenu("About");
-
-		JMenu set = new JMenu("Settings");
+		JMenu info = new JMenu("Help");
+		
+		JMenuItem about = new JMenuItem("About");
+		info.add(about);
+		about.setActionCommand("info");
+		about.addActionListener(this);
+		
+     	JMenu set = new JMenu("Settings");
 		set.setIcon(iconSettings);
 
 		JMenu setGame = new JMenu("Set Game");
@@ -111,8 +128,11 @@ public class Window extends JFrame implements ActionListener {
 		// Size of the pane.
 		content.setPreferredSize(new Dimension(500, 500));
 		this.setContentPane(content);
+		
 
-	}
+    }
+		
+
 
 	//Set up the menu listener behavior
 		@Override
@@ -131,10 +151,16 @@ public class Window extends JFrame implements ActionListener {
 			//Settings sounds Off
 			case "sound_off":			
 				music.close(); break;
+			case "info":			
+				panel = new JPanel();
+                JOptionPane.showMessageDialog(panel, "Game Developers:\n\nFilip Filipov - Sitting Bit\nNikola Hristov - Crazy code\nVelislav Nikiforov - .Net Hawk\nPatrik - Java Cloud\nMariya Hadzhipetrova - Inka Loop\nDaniela Petrova - Red Bug",
+		                        "Developers info", JOptionPane.INFORMATION_MESSAGE);
 			default:
 				break;
 			}			
 		}
+		
+		
 		
 
 	public static void main(String[] args) {

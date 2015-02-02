@@ -17,8 +17,9 @@ import javax.swing.SwingUtilities;
 
 public class Window extends JFrame implements ActionListener {
 
-	private Sound music;
-	
+	static Window window;
+	static Board board;
+	private Sound music;	
 	private JPanel panel;
  
 		
@@ -115,8 +116,8 @@ public class Window extends JFrame implements ActionListener {
 
 		setJMenuBar(menubar);
 		
-		//This is just a placeholder to replace with Board later.
-		Board content = new Board();
+		board = new Board(5, 5);
+		JPanel content = board;
 		// Size of the pane.
 		content.setPreferredSize(new Dimension(500, 500));
 		this.setContentPane(content);
@@ -176,7 +177,7 @@ public class Window extends JFrame implements ActionListener {
 					splash.close();
 				}
 				//Create an instance of the Window and resize it to fit all the content.
-				Window window = new Window();
+				window = new Window();
 				//window.add (new Board());
 				window.pack();
 				// Puts frame to center of the screen.

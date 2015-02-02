@@ -74,7 +74,7 @@ public class Board extends JPanel  {
 				}
 			}
 		}
-//		Window.endGame();
+		Window.endGame();
 	}
  
 }

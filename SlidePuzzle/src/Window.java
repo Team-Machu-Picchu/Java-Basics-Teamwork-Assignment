@@ -188,5 +188,11 @@ public class Window extends JFrame implements ActionListener {
 			}
 		});
 	}
-
+	
+	public static void endGame() {
+		FinalPane finished = new FinalPane();
+		window.setContentPane(finished);
+		window.revalidate();
+	}
+	
 }

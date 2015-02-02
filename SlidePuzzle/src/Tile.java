@@ -31,6 +31,14 @@ public class Tile extends JButton{
 		this.icon = icon;
 	}
 	
+	//Changing Cow and Row
+	public void setCol(int col){
+		this.col = col;
+	}
+	public void setRow(int row){
+		this.row = row;
+	}
+	
 	public Tile(int iconRowIndex, int iconColIndex) {
 		super();
 		this.iconRowIndex = iconRowIndex;

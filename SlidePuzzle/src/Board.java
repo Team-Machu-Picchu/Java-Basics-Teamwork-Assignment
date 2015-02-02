@@ -34,7 +34,7 @@ public class Board extends JPanel  {
 					tile.setIcon(new ImageIcon(cropped));
 				}
 				tile.setBackground(Color.GRAY);
-				//tile.addActionListener(new TileListener());
+				tile.addActionListener(new TileListener());
 				this.add(tile);
 			}
 		}      

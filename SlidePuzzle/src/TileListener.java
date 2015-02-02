@@ -1,8 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.sun.java.swing.plaf.windows.resources.windows;
-
 public class TileListener implements ActionListener{
 	private Tile target;
 	private Tile empty;

@@ -1,9 +1,12 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.SplashScreen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -20,17 +23,19 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 
 // Generate our main game window.
-public class Window extends JFrame implements ActionListener, ItemListener {
+public class Window extends JFrame implements ActionListener, ItemListener, FocusListener {
 
-	int rows = 5, cols = 5;
+	int rows = 5, cols = 5, scramble = 25;
 	static Window window;
 	static Board board;
 	private Sound music;
 	private JPanel content;
+//	private Randomizer random;
 
 	public Window() {
 		// Sets the title
@@ -126,7 +131,6 @@ public class Window extends JFrame implements ActionListener, ItemListener {
 
 		JToggleButton musicSwitch = new JToggleButton("Music On/Off", true);
 		musicSwitch.addItemListener(this);
-		musicSwitch.setFocusPainted(false);
 
 		JButton about = new JButton("About");
 		about.setActionCommand("info");
@@ -150,7 +154,6 @@ public class Window extends JFrame implements ActionListener, ItemListener {
 		
 		// Setup the dropdown selections.
 		Integer[] dimention = { 3, 4, 5, 6, 7, 8, 9, 10 };
-		String[] scramble = { "No (debug mode)", "Yes (demo mode)" };
 		
 		// Create the selection boxes with the default selections.
 		JComboBox<Integer> rowList = new JComboBox<>(dimention);
@@ -162,15 +165,16 @@ public class Window extends JFrame implements ActionListener, ItemListener {
 		rowList.setSelectedIndex(2);
 		colList.setSelectedIndex(2);
 		
-		JComboBox<String> scrambleList = new JComboBox<>(scramble);
-		scrambleList.setName("scramble");
-		scrambleList.addActionListener(this);
-		scrambleList.setSelectedIndex(1);
+		// Setup the text field to enter the scramble factor.
+		JTextField scrambleFactor = new JTextField("25 (default)");
+		scrambleFactor.setHorizontalAlignment(JTextField.CENTER);
+		scrambleFactor.setFont(new Font("", Font.BOLD, 12));
+		scrambleFactor.addFocusListener(this);
 
 		// Make labels for the boxes.
-		JLabel rowLabel = new JLabel("rows");
-		JLabel colLabel = new JLabel("columns");
-		JLabel scrambleLabel = new JLabel("scramble board");
+		JLabel rowLabel = new JLabel("Rows");
+		JLabel colLabel = new JLabel("Columns");
+		JLabel scrambleLabel = new JLabel("Scramble factor");
 
 		// Arrange everything with spacers.
 		lowerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -184,7 +188,8 @@ public class Window extends JFrame implements ActionListener, ItemListener {
 		lowerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
 		lowerPanel.add(scrambleLabel);
 		lowerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
-		lowerPanel.add(scrambleList);
+		lowerPanel.add(scrambleFactor);
+		lowerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
 		
 		return lowerPanel;
 	}
@@ -200,11 +205,16 @@ public class Window extends JFrame implements ActionListener, ItemListener {
 		board.setPreferredSize(new Dimension(500, 500));
 		// Add the new board to the center
 		// of the content pane and refresh it.
+		
+		// Scramble the board with the given number of moves.
+//		random = new Randomizer();
+//		random.Shuffle(scramble);
+		
 		content.add(board, BorderLayout.CENTER);
 		board.revalidate();
 	}
 
-	// Set up the menu, button, selection box behavior
+	// Set up the menu, button and selection box behavior.
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		// Get the raw object that was the source of the click signal.
@@ -219,7 +229,7 @@ public class Window extends JFrame implements ActionListener, ItemListener {
 			}
 			else if (jcbName.equals("cols")) {
 				cols = ((Integer)(jcb.getSelectedItem()));
-			}				
+			}
 		}
 		else {
 			// If not it was a JButton or a menus,
@@ -255,7 +265,7 @@ public class Window extends JFrame implements ActionListener, ItemListener {
 		}
 	}
 
-	// Set up a listener for the two-state music button.
+	// Set up the two-state music button behavior.
 	@Override
 	public void itemStateChanged(ItemEvent event) {
 		if(event.getStateChange() == ItemEvent.SELECTED){
@@ -264,6 +274,20 @@ public class Window extends JFrame implements ActionListener, ItemListener {
 		else {
 			music.close();
 		}
+	}
+	
+	// Set up the editable text field behavior.
+	@Override
+	public void focusGained(FocusEvent e) {
+		// Do nothing.	
+	}
+	
+	// Set the scramble factor when the field
+	// loses focus (the reset button is clicked).
+	@Override
+	public void focusLost(FocusEvent e) {
+		JTextField factor = (JTextField)e.getSource();
+		scramble = Integer.parseInt(factor.getText());		
 	}
 
 	public static void main(String[] args) {

@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 
-// Generate our main game window.
+// Generates our main game window and can take some player input.
 public class Window extends JFrame implements ActionListener, ItemListener, FocusListener {
 
 	int rows = 5, cols = 5, scramble = 25;
@@ -35,7 +35,7 @@ public class Window extends JFrame implements ActionListener, ItemListener, Focu
 	static Board board;
 	private Sound music;
 	private JPanel content;
-//	private Randomizer random;
+	private Randomizer random;
 
 	public Window() {
 		// Sets the title
@@ -203,13 +203,13 @@ public class Window extends JFrame implements ActionListener, ItemListener, Focu
 		board = new Board(rows, cols);
 		// Set the size of the board.
 		board.setPreferredSize(new Dimension(500, 500));
-		// Add the new board to the center
-		// of the content pane and refresh it.
 		
 		// Scramble the board with the given number of moves.
-//		random = new Randomizer();
-//		random.Shuffle(scramble);
+		random = new Randomizer();
+		random.Shuffle(scramble);
 		
+		// Add the new board to the center
+		// of the content pane and refresh it.
 		content.add(board, BorderLayout.CENTER);
 		board.revalidate();
 	}

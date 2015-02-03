@@ -1,6 +1,8 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// This class intercepts any mouse clicks on
+// the game board and performs the moves when appropriate.
 public class TileListener implements ActionListener{
 	private Tile target;
 	private Tile empty;

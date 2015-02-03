@@ -40,26 +40,22 @@ public class FinalPane extends JComponent implements MouseListener {
 
 	@Override
 	public void mousePressed(java.awt.event.MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		// Do nothing.
 	}
 
 	@Override
 	public void mouseReleased(java.awt.event.MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		// Do nothing.
 	}
 
 	@Override
 	public void mouseEntered(java.awt.event.MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		// Do nothing.
 	}
 
 	@Override
 	public void mouseExited(java.awt.event.MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		// Do nothing.
 	}
 
 }

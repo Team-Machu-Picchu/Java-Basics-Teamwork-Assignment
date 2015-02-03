@@ -35,14 +35,6 @@ public class Tile extends JButton{
 		this.icon = icon;
 	}
 	
-	//Changing Cow and Row
-	public void setCol(int col){
-		this.col = col;
-	}
-	public void setRow(int row){
-		this.row = row;
-	}
-	
 //	The tile is always initialized with
 //	the icon matching its physical position.
 //	The actual image is assigned later.

@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 
 import javazoom.jl.player.Player;
 
@@ -24,16 +26,24 @@ public class Sound extends Thread {
     
     //on-click sound
     public static void clickSound() {
-        try {
-        	AudioInputStream click = AudioSystem.getAudioInputStream(new File("sounds/blop.wav"));
-        	Clip clip = AudioSystem.getClip();
-        	clip.open(click);
-        	clip.start();
-        } catch(Exception ex) {
-            System.out.println("Error with playing sound.");
-            ex.printStackTrace();
-        }
-    }
+		try {
+			AudioInputStream click = AudioSystem.getAudioInputStream(new File("sounds/blop.wav"));
+			Clip clip = AudioSystem.getClip();        	
+			clip.open(click);
+			clip.addLineListener(new LineListener() {
+				@Override
+				public void update(LineEvent event) {
+					if (event.getType() == LineEvent.Type.STOP) {
+						event.getLine().close();					
+					}
+				}
+			});
+			clip.start();
+		} catch(Exception ex) {
+			System.out.println("Error with playing sound.");
+			ex.printStackTrace();
+		}
+	}
     
     public void run() {
     	// Play in an infinite loop.

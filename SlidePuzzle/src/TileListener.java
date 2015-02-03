@@ -1,5 +1,10 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class TileListener implements ActionListener{
 	private Tile target;
@@ -16,12 +21,14 @@ public class TileListener implements ActionListener{
 				makeMove(target, empty);
 				target.repaint();
 				empty.repaint();
-//				Sound.makeSound();
+				Sound.clickSound(); // on-click sound :( but not working
 				empty = null;
 				Window.board.checkIfComplete();
 			}
 		}	
 	}
+	
+	
 
 	boolean findEmptyTile(Tile[][] buttons, int targetRow, int targetCol) {
 		Tile testTile;

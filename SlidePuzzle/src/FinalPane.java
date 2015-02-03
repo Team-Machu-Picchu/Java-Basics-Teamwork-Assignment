@@ -7,6 +7,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+// A simple pane with the completed picture,
+// which is meant to replace our board when
+// the puzzle is completed.
 public class FinalPane extends JComponent implements MouseListener {
 
 	private static BufferedImage puzzleImage;
@@ -25,6 +28,7 @@ public class FinalPane extends JComponent implements MouseListener {
 		g.drawImage(puzzleImage, 0, 0, puzzleImage.getWidth(), puzzleImage.getHeight(), null);
 	}
 
+	// Close the game window when clicked.
 	@Override
 	public void mouseClicked(java.awt.event.MouseEvent e) {
 		Window.window.dispose();

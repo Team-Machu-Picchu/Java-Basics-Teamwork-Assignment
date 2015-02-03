@@ -1,6 +1,10 @@
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+// A tile build on top of a standard button.
+// It knows its position on the board (which
+// does not change) and where its current icon
+// originated from.
 public class Tile extends JButton{
 	private int row, col, iconRowIndex, iconColIndex;
 	private ImageIcon icon;
@@ -39,6 +43,9 @@ public class Tile extends JButton{
 		this.row = row;
 	}
 	
+//	The tile is always initialized with
+//	the icon matching its physical position.
+//	The actual image is assigned later.
 	public Tile(int iconRowIndex, int iconColIndex) {
 		super();
 		this.iconRowIndex = iconRowIndex;
@@ -48,6 +55,8 @@ public class Tile extends JButton{
 		this.icon = null;
 	}
 	
+//	Check if the current icon matches the starting
+//  one by comparing the buttons two index pairs.
 	public boolean hasRightImage() {
 		return (row == iconRowIndex && col == iconColIndex) ? true : false;
 	}

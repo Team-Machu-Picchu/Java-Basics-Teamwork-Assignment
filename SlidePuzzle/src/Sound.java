@@ -8,12 +8,15 @@ import javax.sound.sampled.Clip;
 
 import javazoom.jl.player.Player;
 
+// A music and sound effect player,
+// working in a separate thread.
 public class Sound extends Thread {
 
     private String fileLocation;
     private boolean loop;
     private Player player;
 
+    // Set up our song.
     public Sound() {
         this.fileLocation = "sounds/wipala.mp3";
         this.loop = true;
@@ -33,7 +36,7 @@ public class Sound extends Thread {
     }
     
     public void run() {
-    	// Play in an infinite loop;
+    	// Play in an infinite loop.
         try {
         	while (loop) {
                 FileInputStream fis = new FileInputStream(fileLocation);
@@ -46,7 +49,7 @@ public class Sound extends Thread {
         }
     }
 
-    // Close the player;
+    // Close the player and it thread.
     public void close(){
         loop = false;
         player.close();

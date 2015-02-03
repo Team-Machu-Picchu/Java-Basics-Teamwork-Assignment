@@ -13,101 +13,60 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-
-
+// Generate our main game window.
 public class Window extends JFrame implements ActionListener {
 
+	int rows = 5, cols = 5;
 	static Window window;
 	static Board board;
 	private Sound music;	
 	private JPanel panel;
- 
-		
+ 		
 	public Window() {
 
 		// Sets the title
-		this.setTitle("Machu Picchu Puzzle Game");
-
-		// Sets size of the frame.
-		if(false) { // Full screen mode
-			// Disables decorations for this frame.
-			this.setUndecorated(true);
-			// Puts the frame to full screen.
-			this.setExtendedState(this.MAXIMIZED_BOTH);
-		}
-		else { // Window mode			
-			// Frame cannot be resized by the user.
-			this.setResizable(false);
-		}
-
+		this.setTitle("Machu Picchu Puzzle Game");	
+		// Frame cannot be resized by the user.
+		this.setResizable(false);
 		// Exit the application when user close frame.
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		//Create a menubar	
+		// Create a menubar.
 		JMenuBar menubar = new JMenuBar();
 
-		//Display icons in the menu
+		// Display icons in the menu.
 		ImageIcon iconNew = new ImageIcon("Images/puzzle.jpg");
-		ImageIcon iconOpen = new ImageIcon("Images/open.png");
-		ImageIcon iconSave = new ImageIcon("Images/save.png");
 		ImageIcon iconExit = new ImageIcon("Images/exit.png");
-		ImageIcon iconSettings = new ImageIcon("Images/settings.png");
-		ImageIcon iconInd1 = new ImageIcon("Images/ind1.jpg");
-		ImageIcon iconInd2 = new ImageIcon("Images/ind2.jpg");
-		ImageIcon iconInd3 = new ImageIcon("Images/ind3.jpg");
-		ImageIcon iconInd4 = new ImageIcon("Images/ind4.png");
 		ImageIcon iconSoundOn = new ImageIcon("Images/soundOn.png");
 		ImageIcon iconSoundOff = new ImageIcon("Images/soundOff.jpg");
 
+		// Set up the menus.
 		JMenu file = new JMenu("Menu");
 		JMenu info = new JMenu("Help");
 		
-		JMenuItem about = new JMenuItem("About");
-		info.add(about);
+		// Help menus items.
+		JMenuItem about = new JMenuItem("About");		
 		about.setActionCommand("info");
 		about.addActionListener(this);
 		
-     	JMenu set = new JMenu("Settings");
-		set.setIcon(iconSettings);
-
-		JMenu setGame = new JMenu("Set Game");
-		JMenu setSounds = new JMenu("Set Sounds");
-
-		set.add(setGame);
-		set.add(setSounds);
-
-		JMenuItem game1 = new JMenuItem("Puzzle 1", iconInd1);
-		JMenuItem game2 = new JMenuItem("Puzzle 2", iconInd2);
-		JMenuItem game3 = new JMenuItem("Puzzle 3", iconInd3);
-		JMenuItem game4 = new JMenuItem("Puzzle 4", iconInd4);
-
-		setGame.add(game1);
-		setGame.add(game2);
-		setGame.add(game3);
-		setGame.add(game4);
-
+		info.add(about);
+		
+		// File menu items.
+		JMenuItem fileNew = new JMenuItem("New Game", iconNew);
 		JMenuItem soundOn = new JMenuItem("Sound On", iconSoundOn);
 		JMenuItem soundOff = new JMenuItem("Sound Off", iconSoundOff);
+		JMenuItem fileExit = new JMenuItem("Exit", iconExit);
 		soundOn.setActionCommand("sound_on");
 		soundOff.setActionCommand("sound_off");
 		soundOn.addActionListener(this);
 		soundOff.addActionListener(this);
-
-		setSounds.add(soundOn);
-		setSounds.add(soundOff);
-
-		JMenuItem fileNew = new JMenuItem("New Game", iconNew);
-		JMenuItem fileOpen = new JMenuItem("Open", iconOpen);
-		JMenuItem fileSave = new JMenuItem("Save", iconSave);
-		JMenuItem fileExit = new JMenuItem("Exit", iconExit);
 		fileExit.setActionCommand("exit");  
 		fileExit.addActionListener(this);                
 
 		file.add(fileNew);
-		file.add(fileOpen);
-		file.add(fileSave);
 		file.addSeparator();
-		file.add(set);
+		file.add(soundOn);
+		file.add(soundOff);
 		file.addSeparator();
 		file.add(fileExit);
 
@@ -116,51 +75,59 @@ public class Window extends JFrame implements ActionListener {
 
 		setJMenuBar(menubar);
 		
-		board = new Board(5, 5);
+		// Create a new game board.
+		board = new Board(rows, cols);
+		// Set the size of the board.
+		board.setPreferredSize(new Dimension(500, 500));
+		// Put it inside the content pane.
 		JPanel content = board;
-		// Size of the pane.
-		content.setPreferredSize(new Dimension(500, 500));
-		this.setContentPane(content);
-		
+		// Put the content pane in the window.
+		this.setContentPane(content);		
 
     }
 		
 
 
-	//Set up the menu listener behavior
+		// Set up the menu listener behavior
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			//Get the source of the click signal. Returns a raw object so
-			//cast as an AbstractButton - works with all buttons and menus.
+			// Get the source of the click signal. Returns a raw object so
+			// cast as an AbstractButton - works with all buttons and menus.
 			AbstractButton target = (AbstractButton)event.getSource();
 			switch (target.getActionCommand()) {
-			//Exit the application
+			// Exit the application.
 			case "exit":
 				System.exit(0); break;
-			//Settings sounds On
+			// Settings sounds On.
 			case "sound_on":			
 				music = new Sound();
 				music.start(); break;
-			//Settings sounds Off
+			// Settings sounds Off.
 			case "sound_off":			
 				music.close(); break;
+			// Show the credits.			
 			case "info":			
 				panel = new JPanel();
-                JOptionPane.showMessageDialog(panel, "Game Developers:\n\nFilip Filipov - Sitting Bit\nNikola Hristov - Crazy code\nVelislav Nikiforov - .Net Hawk\nPatrik - Java Cloud\nMariya Hadzhipetrova - Inka Loop\nDaniela Petrova - Red Bug",
-		                        "Developers info", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(panel,
+                		"Game Developers:\n\n"
+                		+ "Filip Filipov - Sitting Bit\n"
+                		+ "Nikola Hristov - Crazy code\n"
+                		+ "Velislav Nikiforov - .Net Hawk\n"
+                		+ "Patrik - Java Cloud\n"
+                		+ "Mariya Hadzhipetrova - Inka Loop\n"
+                		+ "Daniela Petrova - Red Bug",
+		                        "Developers info", JOptionPane.INFORMATION_MESSAGE); break;
 			default:
 				break;
 			}			
-		}
-		
-		
-		
+		}			
 
 	public static void main(String[] args) {
-
+		// Display the window after rendering it.
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
+				
 				//Try to show the splash screen.
 				final SplashScreen splash = SplashScreen.getSplashScreen();
 				if (splash == null) {
@@ -168,17 +135,18 @@ public class Window extends JFrame implements ActionListener {
 				}
 				else {
 					try {
-						//Hold the splash screen for 3 seconds.
+						// Hold the splash screen for 3 seconds.
 						Thread.sleep(3000);
 					}
 					catch(InterruptedException e) {
 						System.err.println("Thread was interrupted!");
 					}
+					// Close the splash screen.
 					splash.close();
 				}
-				//Create an instance of the Window and resize it to fit all the content.
+				// Create an instance of the Window
+				// and resize it to fit all the content.
 				window = new Window();
-				//window.add (new Board());
 				window.pack();
 				// Puts frame to center of the screen.
 				window.setLocationRelativeTo(null);
@@ -189,6 +157,8 @@ public class Window extends JFrame implements ActionListener {
 		});
 	}
 	
+	// Replace the board with the completed
+	// puzzle image and redraw the window.
 	public static void endGame() {
 		FinalPane finished = new FinalPane();
 		window.setContentPane(finished);

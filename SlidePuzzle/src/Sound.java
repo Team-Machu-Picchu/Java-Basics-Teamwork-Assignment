@@ -2,9 +2,11 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 
+import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
 
@@ -27,8 +29,11 @@ public class Sound extends Thread {
     //on-click sound
     public static void clickSound() {
 		try {
-			AudioInputStream click = AudioSystem.getAudioInputStream(new File("sounds/blop.wav"));
-			Clip clip = AudioSystem.getClip();        	
+			AudioInputStream click = AudioSystem.getAudioInputStream(new File("sounds/blop.wav"));			
+			AudioFormat format = click.getFormat();
+			DataLine.Info info = new DataLine.Info(Clip.class, format);
+			Clip clip = (Clip)AudioSystem.getLine(info);
+			clip = AudioSystem.getClip();
 			clip.open(click);
 			clip.addLineListener(new LineListener() {
 				@Override

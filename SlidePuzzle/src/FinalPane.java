@@ -12,11 +12,13 @@ import javax.swing.JComponent;
 // the puzzle is completed.
 public class FinalPane extends JComponent implements MouseListener {
 
+	private static BufferedImage textImage;
 	private static BufferedImage puzzleImage;
 
 	public FinalPane() {
 		addMouseListener(this);
 		try {
+			textImage = ImageIO.read(new File("Images/winner.png"));
 			puzzleImage = ImageIO.read(new File("Images/pic1.jpg"));
 		}
 		catch (IOException error) {
@@ -25,7 +27,8 @@ public class FinalPane extends JComponent implements MouseListener {
 	}
 	
 	protected void paintComponent(Graphics g) {
-		g.drawImage(puzzleImage, 0, 0, puzzleImage.getWidth(), puzzleImage.getHeight(), null);
+		g.drawImage(textImage, 0, 0, textImage.getWidth(), textImage.getHeight(), null);
+		g.drawImage(puzzleImage, 0, 50, puzzleImage.getWidth(), puzzleImage.getHeight(), null);
 	}
 
 	// Close the game window when clicked.

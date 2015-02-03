@@ -9,8 +9,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import com.sun.corba.se.spi.ior.MakeImmutable;
-
 // The main game board.
 public class Board extends JPanel {
 	// Set up a 2D array of all tiles.
@@ -32,8 +30,8 @@ public class Board extends JPanel {
 		int width = puzzle.getWidth();
 		int height = puzzle.getHeight();
 		
-		Random randomRow = new Random();
-		Random randomCol = new Random();
+//		Random randomRow = new Random();
+//		Random randomCol = new Random();
 				
  		for(int row = 0; row < rows; row++){
 			for(int col = 0; col < cols; col++){
@@ -51,30 +49,34 @@ public class Board extends JPanel {
 				tile.setBackground(Color.GRAY);
 				// Add our own listener to the tile so it reacts to clicks.
 				tile.addActionListener(new TileListener());
-
-				if (row == 0 && col == 0) { // keep the grey button on the top left corner
-					buttons[row][col] = tile;
-				}
-				else {
-					while(true) {
-						int newRow = randomRow.nextInt(rows);
-						int newCol = randomCol.nextInt(cols);
-						if (buttons[newRow][newCol] == null) {
-							buttons[newRow][newCol] = tile;
-							tile.setRow(newRow);
-							tile.setCol(newCol);
-							break;
-						}
-					}
-				}
+				buttons[row][col] = tile;
+				this.add(tile);
 			}
-		}
- 		
- 		for(int row = 0; row < rows; ++row) {
- 			for(int col = 0; col < cols; ++col) {
- 				this.add(buttons[row][col]);
- 			}
  		}
+
+//				if (row == 0 && col == 0) { // keep the grey button on the top left corner
+//					buttons[row][col] = tile;
+//				}
+//				else {
+//					while(true) {
+//						int newRow = randomRow.nextInt(rows);
+//						int newCol = randomCol.nextInt(cols);
+//						if (buttons[newRow][newCol] == null) {
+//							buttons[newRow][newCol] = tile;
+//							tile.setRow(newRow);
+//							tile.setCol(newCol);
+//							break;
+//						}
+//					}
+//				}
+//			}
+//		}
+// 		
+// 		for(int row = 0; row < rows; ++row) {
+// 			for(int col = 0; col < cols; ++col) {
+// 				this.add(buttons[row][col]);
+// 			}
+// 		}
 	}
 	
 	// Go through all the tiles and if they all

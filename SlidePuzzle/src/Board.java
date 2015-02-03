@@ -32,7 +32,7 @@ public class Board extends JPanel {
 		
 //		Random randomRow = new Random();
 //		Random randomCol = new Random();
-				
+		
  		for(int row = 0; row < rows; row++){
 			for(int col = 0; col < cols; col++){
 				// Initialize the tile according to its position.

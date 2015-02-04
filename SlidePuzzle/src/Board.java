@@ -3,7 +3,6 @@ import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -30,9 +29,6 @@ public class Board extends JPanel {
 		int width = puzzle.getWidth();
 		int height = puzzle.getHeight();
 		
-//		Random randomRow = new Random();
-//		Random randomCol = new Random();
-		
  		for(int row = 0; row < rows; row++){
 			for(int col = 0; col < cols; col++){
 				// Initialize the tile according to its position.
@@ -53,30 +49,6 @@ public class Board extends JPanel {
 				this.add(tile);
 			}
  		}
-
-//				if (row == 0 && col == 0) { // keep the grey button on the top left corner
-//					buttons[row][col] = tile;
-//				}
-//				else {
-//					while(true) {
-//						int newRow = randomRow.nextInt(rows);
-//						int newCol = randomCol.nextInt(cols);
-//						if (buttons[newRow][newCol] == null) {
-//							buttons[newRow][newCol] = tile;
-//							tile.setRow(newRow);
-//							tile.setCol(newCol);
-//							break;
-//						}
-//					}
-//				}
-//			}
-//		}
-// 		
-// 		for(int row = 0; row < rows; ++row) {
-// 			for(int col = 0; col < cols; ++col) {
-// 				this.add(buttons[row][col]);
-// 			}
-// 		}
 	}
 	
 	// Go through all the tiles and if they all

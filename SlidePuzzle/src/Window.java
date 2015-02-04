@@ -51,9 +51,11 @@ public class Window extends JFrame implements ActionListener, ItemListener, Focu
 		JPanel selectorPanel = new JPanel();
 		selectorPanel.setLayout(new GridLayout(2, 0));
 		selectorPanel.setPreferredSize(new Dimension(500, 50));
+		
 		// Create the top part that replicates
 		// the menu functions with buttons.
 		JPanel upperPanel = createControlButtons();
+		
 		// Create the bottom part that adds drop-down
 		// selectors for the rows, columns and randomizer.
 		JPanel lowerPanel = createControlBoxes();	
@@ -83,7 +85,7 @@ public class Window extends JFrame implements ActionListener, ItemListener, Focu
 		// Create icons for the menu.
 		ImageIcon iconNew = new ImageIcon("Images/puzzle.jpg");
 		ImageIcon iconExit = new ImageIcon("Images/exit.png");
-		ImageIcon iconSoundOn = new ImageIcon("Images/soundOn.png");
+		ImageIcon iconSoundOn = new ImageIcon("Images/soundOn.jpg");
 		ImageIcon iconSoundOff = new ImageIcon("Images/soundOff.jpg");
 
 		// Help menus items.
@@ -255,12 +257,9 @@ public class Window extends JFrame implements ActionListener, ItemListener, Focu
 								+ "Filip Filipov - Sitting Bit\n"
 								+ "Nikola Hristov - Crazy code\n"
 								+ "Velislav Nikiforov - .Net Hawk\n"
-								+ "Patrik - Java Cloud\n"
 								+ "Mariya Hadzhipetrova - Inka Loop\n"
 								+ "Daniela Petrova - Red Bug",
 								"Developers info", JOptionPane.INFORMATION_MESSAGE); break;
-			default:
-				break;
 			}
 		}
 	}
